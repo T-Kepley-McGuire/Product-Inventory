@@ -1,52 +1,46 @@
-# Starter code: Node.js, Express, & PostgreSQL
+# Product Inventory
 
-This starter code is intended to be run for the Node.js, Express, & PostgreSQL module in the Thinkful curriculum.
+### A Thinkful Assesment
 
-## Existing files
+This is a backend server for viewing and editing product inventory for a fictional store.
 
-As you work through the Node.js, Express & PostgreSQL module, you will be writing code that allows your controllers to connect to and query your PostgreSQL database via [Knex](http://knexjs.org/). The table below describes the files and folders in the starter code:
+Users can get product inventory and statistics, as well as out-of-stock products; 
+create, update, and delete suppliers for said products; 
+get product categories
 
-| Folder/file path                 | Description                                                                                                           |
-| -------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| `src/app.js`                     | Directs requests to the appropriate routers.                                                                          |
-| `src/server.js`                  | Starts the server on `localhost:5000` by default.                                                                     |
-| `src/products/`                  | A folder that contains the `products.controller.js` and `products.router.js` files for the `products` resource.       |
-| `src/categories/`                | A folder that contains the `categories.controller.js` and `categories.router.js` files for the `categories` resource. |
-| `src/suppliers/`                 | A folder that contains the `suppliers.controller.js` and `suppliers.router.js` files for the `suppliers` resource.    |
-| `src/db/`                        | A folder where you will add migration and seed files for your database later on.                                      |
-| `src/db/fixtures`                | A folder containing sample data you will seed your database with later on.                                            |
-| `src/errors/methodNotAllowed.js` | An error handler for forbidden request methods                                                                        |
-| `.env.sample`                    | A sample environment configuration file                                                                               |
+Deployed server can be found [here](https://product-inventory-server.onrender.com/).
 
-In the `*.controller.js` files, the route handlers return hard-coded data for now, but later on, you will modify the controllers to manipulate and return data from a PostgreSQL database.
+## Usage
 
-This starter code closely follows the best practices and patterns established in the Robust Server Structure module.
+Exact details for proper request formatting is not included as the server is still in development and not intended for full release
 
-## Database setup
+### Available Commands
 
-1. Set up a new ElephantSQL database instance by following the instructions in the "PostgreSQL: Creating & Deleting Databases" checkpoint.
-1. After setting up your database instance, connect DBeaver to your new database instance by following the instructions in the "PostgreSQL: Installing DBeaver" checkpoint.
+| HTTP verb	| Path	| Description |
+|---|---|---|
+| GET	| /products |	Retrieve a list of all products
+| GET	| /products/:productId |	Retrieve a product by ID
+| GET	| /products/total-weight-by-product |	Get combined weight of all products in inventory sorted by product
+| GET |	/products/price-summary |	Retrieve a list average, min, and max price information for all products grouped by supplier
+| GET	| /products/out-of-stock-count |	Retrieves a list of all out of stock products
+| PUT |	/suppliers/:supplierId |	Update a supplier by ID
+| DELETE | /suppliers/:supplierId | Deletes a supplier by ID
+| POST | /suppliers | Creates a new supplier
+| GET | /categories | Retrieves a list of all categories of products
+| GET | /categories/:categoryId | Retrieves an individual category
+
+
+## Implementation
+
+This server was created with Node.js, Express, and Knex and is deployed by [Render.com](https://render.com/)
+
+The database is hosted by [ElephantSQL](https://www.elephantsql.com/) which is a PostgreSQL server hosting site
+
+Currently, only some routes are implimented, so there's no way to view suppliers and no way to update info for the categories or products
 
 ## Installation
 
-1. Fork and clone this repository.
-1. Run `cp .env.sample .env`.
-1. Update your `.env` file with a connection URL to your ElephantSQL database instance. The connection URL can be found in your ElephantSQL database instance details (e.g. `"postgres://myfakedatabase:8t6FiWqSDF8GsR--7mrun245I9TofnWd@fakepostgres.db.elephantsql.com:5432/myfakedatabase"`).
-1. Run `npm install` to install project dependencies.
-1. Run `npm run start:dev` to start your server in development mode.
-1. In your browser or Postman, navigate to `localhost:5000/products`. If your server is running properly, you should get back the following json response:
-
-```json
-{
-  "data": [
-    {
-      "product_title": "product 1"
-    },
-    {
-      "product_title": "product 2"
-    }
-  ]
-}
-```
-
-If you have trouble getting the server to run, reach out for assistance.
+1. Fork and Clone repository
+2. Open terminal to local repo
+3. run ```npm install``` and ```npm start```
+4. Requests can be made to http://localhost:5000/
